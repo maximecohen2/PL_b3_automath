@@ -21,7 +21,7 @@ class MathIter:
         self.input = self.delta.index(max(self.delta))
         for i, beta in enumerate(self.beta):
             if self.table[i][self.input] != 0:
-                self.betaIndex.append(str(beta / self.table[i][self.input]))
+                self.betaIndex.append(str(round(beta / self.table[i][self.input], 1)))
             else:
                 self.betaIndex.append("inf.")
         temp_tab = [float(x) for x in self.betaIndex if x != "inf." and float(x) > 0]
@@ -73,7 +73,7 @@ class MathIter:
         ptable = prev_iter.table
         pbeta = prev_iter.beta
         pz = prev_iter.z
-        self.z = pz - pbeta[s] * pdelta[e] / ptable[s][e]
+        self.z = round(pz - pbeta[s] * pdelta[e] / ptable[s][e], 3)
 
     def is_finish(self):
         for delta in self.delta:
