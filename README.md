@@ -1,5 +1,9 @@
 # Automath
 
+## Description
+
+Progamme qui réalise les itérations des exercices de math
+
 ## Pré-requis
     pip3 install terminaltables
 

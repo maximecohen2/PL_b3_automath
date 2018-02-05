@@ -2,21 +2,22 @@
 # coding: utf-8
 
 import argparse
+import json
 from src.MathIter import MathIter
 from src.IterToScreen import IterToScreen
-from data import data
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Generate table",
-                                     usage="%(prog)s [OPTIONS]")
-    parser.add_argument("-x", "--excel", metavar="fileName", help="Write to the excel file", type=str)
+    parser = argparse.ArgumentParser(description="Génère les itérations",
+                                     usage="%(prog)s JsonFile [OPTIONS]")
+    parser.add_argument("json", metavar="ExcelName", help="Nom du fichier json d'entré")
+    parser.add_argument("-x", "--excel", metavar="ExcelName", help="Nom du fichier excel généré", type=str)
+    parser.add_argument("-c", "--csv", metavar="CsvName", help="Nom du fichier csv généré", type=str)
     args = parser.parse_args()
     return args
 
 
-def main():
-    args = parse_args()
+def automath(data, args):
     displayer = IterToScreen()
     actual_iter = MathIter()
     actual_iter.set_first_iter(data)
@@ -29,6 +30,13 @@ def main():
         displayer.write_iter(actual_iter, "iteration " + str(nb_iter))
         nb_iter += 1
 
+
+def main():
+    args = parse_args()
+    with open(args.json, "r") as json_file:
+        json_data = json.loads(json_file.read())
+        for data in json_data:
+            automath(data, args)
 
 
 if __name__ == '__main__':
