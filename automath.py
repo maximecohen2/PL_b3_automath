@@ -9,7 +9,7 @@ from src.IterToScreen import IterToScreen
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Génère les itérations",
-                                     usage="%(prog)s JsonFile [OPTIONS]")
+                                     usage="%(prog)s <JsonFile> [OPTIONS]")
     parser.add_argument("json", metavar="ExcelName", help="Nom du fichier json d'entré")
     parser.add_argument("-x", "--excel", metavar="ExcelName", help="Nom du fichier excel généré", type=str)
     parser.add_argument("-c", "--csv", metavar="CsvName", help="Nom du fichier csv généré", type=str)

@@ -3,6 +3,7 @@
 
 from copy import deepcopy
 
+ROUND_MAX = 14
 
 class MathIter:
 
@@ -43,9 +44,9 @@ class MathIter:
         for i in range(len(ptable)):
             for j in range(len(ptable[i])):
                 if i == s:
-                    self.table[i][j] = round(ptable[s][j] / ptable[s][e], 3)
+                    self.table[i][j] = round(ptable[s][j] / ptable[s][e], ROUND_MAX)
                 else:
-                    self.table[i][j] = round(ptable[i][j] - ptable[s][j] * ptable[i][e] / ptable[s][e], 3)
+                    self.table[i][j] = round(ptable[i][j] - ptable[s][j] * ptable[i][e] / ptable[s][e], ROUND_MAX)
 
     def compute_beta(self, prev_iter):
         s = prev_iter.output
@@ -64,7 +65,7 @@ class MathIter:
         pdelta = prev_iter.delta
         ptable = prev_iter.table
         for j in range(len(pdelta)):
-            self.delta[j] = round(pdelta[j] - ptable[s][j] * pdelta[e] / ptable[s][e], 3)
+            self.delta[j] = round(pdelta[j] - ptable[s][j] * pdelta[e] / ptable[s][e], ROUND_MAX)
 
     def compute_z(self, prev_iter):
         s = prev_iter.output
@@ -73,7 +74,7 @@ class MathIter:
         ptable = prev_iter.table
         pbeta = prev_iter.beta
         pz = prev_iter.z
-        self.z = round(pz - pbeta[s] * pdelta[e] / ptable[s][e], 3)
+        self.z = round(pz - pbeta[s] * pdelta[e] / ptable[s][e], ROUND_MAX)
 
     def is_finish(self):
         for delta in self.delta:

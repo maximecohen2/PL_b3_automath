@@ -25,8 +25,8 @@ class IterToScreen():
                 line[0] = "S"
             line[1] = str(base)
             for j, table in enumerate(math_iter.table[i]):
-                line[3 + j] = str(table)
-            line[3 + len(math_iter.index) + 1] = str(math_iter.beta[i])
+                line[3 + j] = str(round(table, 3))
+            line[3 + len(math_iter.index) + 1] = str(round(math_iter.beta[i], 3))
             line[3 + len(math_iter.index) + 2] += math_iter.betaIndex[i] if i < len(math_iter.betaIndex) else ""
             yield line
 
@@ -34,8 +34,8 @@ class IterToScreen():
         line = self.get_blank_line(math_iter)
         line[1] = "delta"
         for i, delta in enumerate(math_iter.delta):
-            line[3 + i] = str(delta)
-        line[3 + len(math_iter.delta) + 1] = str(math_iter.z)
+            line[3 + i] = str(round(delta, 3))
+        line[3 + len(math_iter.delta) + 1] = str(round(math_iter.z, 3))
         return line
 
     def get_input_line(self, math_iter):
