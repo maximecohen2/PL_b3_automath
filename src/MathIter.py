@@ -34,6 +34,8 @@ class MathIter:
         self.table = deepcopy(data['table'])
         self.beta = deepcopy(data['beta'])
         self.delta = deepcopy(data['delta'])
+        if 'z' in data:
+            self.z = deepcopy(data['z'])
         self.compute_beta_index()
 
 
