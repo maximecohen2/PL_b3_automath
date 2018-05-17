@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/local/bin/python3
 # coding: utf-8
 
 import argparse
@@ -11,6 +11,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Génère les itérations",
                                      usage="%(prog)s <JsonFile> [OPTIONS]")
     parser.add_argument("json", metavar="ExcelName", help="Nom du fichier json d'entré")
+    parser.add_argument("-m", "--min", action="store_true", help="Minimiser le résultat")
     parser.add_argument("-x", "--excel", metavar="ExcelName", help="Nom du fichier excel généré", type=str)
     parser.add_argument("-c", "--csv", metavar="CsvName", help="Nom du fichier csv généré", type=str)
     args = parser.parse_args()
@@ -19,13 +20,13 @@ def parse_args():
 
 def automath(data, args):
     displayer = IterToScreen()
-    actual_iter = MathIter()
+    actual_iter = MathIter(args.min)
     actual_iter.set_first_iter(data)
     displayer.write_iter(actual_iter, "iteration 0")
     nb_iter = 1
     while not actual_iter.is_finish():
         prev_iter = actual_iter
-        actual_iter = MathIter()
+        actual_iter = MathIter(args.min)
         actual_iter.compute_from_prev_iter(prev_iter)
         displayer.write_iter(actual_iter, "iteration " + str(nb_iter))
         nb_iter += 1

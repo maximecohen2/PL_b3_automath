@@ -5,9 +5,10 @@ from copy import deepcopy
 
 ROUND_MAX = 14
 
+
 class MathIter:
 
-    def __init__(self):
+    def __init__(self, m):
         self.base = []
         self.index = []
         self.delta = []
@@ -17,9 +18,13 @@ class MathIter:
         self.table = []
         self.input = None
         self.output = None
+        self.min = m
 
     def compute_beta_index(self):
-        self.input = self.delta.index(max(self.delta))
+        if not self.min:
+            self.input = self.delta.index(max(self.delta))
+        else:
+            self.input = self.delta.index(min(self.delta))
         for i, beta in enumerate(self.beta):
             if self.table[i][self.input] != 0:
                 self.betaIndex.append(str(round(beta / self.table[i][self.input], 1)))
@@ -37,7 +42,6 @@ class MathIter:
         if 'z' in data:
             self.z = deepcopy(data['z'])
         self.compute_beta_index()
-
 
     def compute_table(self, prev_iter):
         s = prev_iter.output
@@ -80,7 +84,9 @@ class MathIter:
 
     def is_finish(self):
         for delta in self.delta:
-            if delta > 0:
+            if delta > 0 and not self.min:
+                return False
+            elif delta < 0 and self.min:
                 return False
         return True
 
