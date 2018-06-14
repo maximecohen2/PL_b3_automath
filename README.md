@@ -9,16 +9,13 @@ Progamme qui réalise les itérations des exercices de math
 
 ## Usage
     $ python3 automath.py -h              
-    usage: automath.py JsonFile [OPTIONS]
+    usage: automath.py <JsonFile> [OPTIONS]
         
     Génère les itérations
         
     positional arguments:
-      ExcelName             Nom du fichier json d'entré
+      JsonFile             Nom du fichier json d'entré
         
     optional arguments:
-      -h, --help            show this help message and exit
-      -x ExcelName, --excel ExcelName
-                                Nom du fichier excel généré
-      -c CsvName, --csv CsvName
-                                Nom du fichier csv généré
+      -h, --help            Montre ce message puis quitte
+      -m, --min             Minimiser le résultat
